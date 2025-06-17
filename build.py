@@ -103,7 +103,7 @@ http://www.apache.org/licenses/
 
 [Full Apache 2.0 license text would go here]
 
-This software contains code extracted from RAGFlow (https://github.com/infiniflow/ragflow)
+This software contains code extracted from deepdoc_pdfparser.ragflow (https://github.com/infiniflow/ragflow)
 which is also licensed under Apache 2.0.
 """
         with open(temp_build_dir / "LICENSE", "w", encoding="utf-8") as f:

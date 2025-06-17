@@ -21,8 +21,8 @@ import os
 
 from huggingface_hub import snapshot_download
 
-from ragflow.api.utils.file_utils import get_project_base_directory
-from ragflow.rag.settings import PARALLEL_DEVICES
+from deepdoc_pdfparser.ragflow.api.utils.file_utils import get_project_base_directory
+from deepdoc_pdfparser.ragflow.rag.settings import PARALLEL_DEVICES
 from .operators import *  # noqa: F403
 from . import operators
 import math

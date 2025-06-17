@@ -18,10 +18,10 @@ import logging
 import copy
 import re
 
-from ragflow.api.db import ParserType
-from ragflow.rag.nlp import rag_tokenizer, tokenize_table, bullets_category, title_frequency, tokenize_chunks
-from ragflow.rag.utils import num_tokens_from_string
-from ragflow.deepdoc.parser import PdfParser, PlainParser
+from deepdoc_pdfparser.ragflow.api.db import ParserType
+from deepdoc_pdfparser.ragflow.rag.nlp import rag_tokenizer, tokenize_table, bullets_category, title_frequency, tokenize_chunks
+from deepdoc_pdfparser.ragflow.rag.utils import num_tokens_from_string
+from deepdoc_pdfparser.ragflow.deepdoc.parser import PdfParser, PlainParser
 
 class Pdf(PdfParser):
     def __init__(self):

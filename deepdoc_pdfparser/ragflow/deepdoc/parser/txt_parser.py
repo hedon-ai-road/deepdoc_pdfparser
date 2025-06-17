@@ -16,8 +16,8 @@
 
 import re
 
-from ragflow.deepdoc.parser.utils import get_text
-from ragflow.rag.nlp import num_tokens_from_string
+from deepdoc_pdfparser.ragflow.deepdoc.parser.utils import get_text
+from deepdoc_pdfparser.ragflow.rag.nlp import num_tokens_from_string
 
 
 class RAGFlowTxtParser:

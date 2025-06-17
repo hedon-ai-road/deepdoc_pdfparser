@@ -14,7 +14,7 @@
 #  limitations under the License.
 #
 
-from ragflow.rag.nlp import find_codec
+from deepdoc_pdfparser.ragflow.rag.nlp import find_codec
 
 def get_text(fnm: str, binary=None) -> str:
     txt = ""

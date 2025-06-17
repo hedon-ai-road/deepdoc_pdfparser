@@ -8,14 +8,10 @@ import os
 import logging
 from typing import Optional, Callable
 
-try:
-    from deepdoc_pdfparser.ragflow.rag.app.manual import Pdf as RagflowPdf, chunk as ragflow_chunk
-    from deepdoc_pdfparser.ragflow.rag.nlp import rag_tokenizer
-    from deepdoc_pdfparser.ragflow.rag.utils import num_tokens_from_string
-    from deepdoc_pdfparser.ragflow.api.db import ParserType
-except ImportError as e:
-    logging.warning(f"无法导入ragflow模块: {e}")
-    logging.warning("请确保ragflow模块在正确的路径下")
+from deepdoc_pdfparser.ragflow.rag.app.manual import Pdf as RagflowPdf, chunk as ragflow_chunk
+from deepdoc_pdfparser.ragflow.rag.nlp import rag_tokenizer
+from deepdoc_pdfparser.ragflow.rag.utils import num_tokens_from_string
+from deepdoc_pdfparser.ragflow.api.db import ParserType
 
 from deepdoc_pdfparser.parse_types import ChunkResult, ParseResult, TableResult
 

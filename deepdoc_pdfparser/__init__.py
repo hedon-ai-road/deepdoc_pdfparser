@@ -11,8 +11,8 @@ from deepdoc_pdfparser.parser import PdfParser
 from deepdoc_pdfparser.parse_types import ChunkResult, ParseResult, TableResult
 from deepdoc_pdfparser.utils import parse_pdf, extract_text, extract_text_by_page, extract_tables, parse_pdf_binary
 
-__version__ = "0.1.5"
-__author__ = "Extracted from RAGFlow DeepDoc"
+__version__ = "0.1.7"
+__author__ = "Extracted from deepdoc_pdfparser.ragflow DeepDoc"
 __license__ = "Apache-2.0"
 
 __all__ = [

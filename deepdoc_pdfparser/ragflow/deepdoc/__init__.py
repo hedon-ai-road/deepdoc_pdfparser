@@ -14,5 +14,6 @@
 #  limitations under the License.
 #
 
-from beartype.claw import beartype_this_package
-beartype_this_package()
+# Temporarily disabled beartype to avoid import conflicts
+# from beartype.claw import beartype_this_package
+# beartype_this_package()

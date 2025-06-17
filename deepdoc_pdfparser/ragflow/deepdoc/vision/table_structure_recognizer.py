@@ -21,8 +21,8 @@ from collections import Counter
 import numpy as np
 from huggingface_hub import snapshot_download
 
-from ragflow.api.utils.file_utils import get_project_base_directory
-from ragflow.rag.nlp import rag_tokenizer
+from deepdoc_pdfparser.ragflow.api.utils.file_utils import get_project_base_directory
+from deepdoc_pdfparser.ragflow.rag.nlp import rag_tokenizer
 from .recognizer import Recognizer
 
 

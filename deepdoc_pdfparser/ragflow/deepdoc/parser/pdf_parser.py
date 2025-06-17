@@ -32,11 +32,11 @@ from huggingface_hub import snapshot_download
 from PIL import Image
 from pypdf import PdfReader as pdf2_read
 
-from ragflow.api import settings
-from ragflow.api.utils.file_utils import get_project_base_directory
-from ragflow.deepdoc.vision import OCR, LayoutRecognizer, Recognizer, TableStructureRecognizer
-from ragflow.rag.nlp import rag_tokenizer
-from ragflow.rag.settings import PARALLEL_DEVICES
+from deepdoc_pdfparser.ragflow.api import settings
+from deepdoc_pdfparser.ragflow.api.utils.file_utils import get_project_base_directory
+from deepdoc_pdfparser.ragflow.deepdoc.vision import OCR, LayoutRecognizer, Recognizer, TableStructureRecognizer
+from deepdoc_pdfparser.ragflow.rag.nlp import rag_tokenizer
+from deepdoc_pdfparser.ragflow.rag.settings import PARALLEL_DEVICES
 
 LOCK_KEY_pdfplumber = "global_shared_lock_pdfplumber"
 if LOCK_KEY_pdfplumber not in sys.modules:
