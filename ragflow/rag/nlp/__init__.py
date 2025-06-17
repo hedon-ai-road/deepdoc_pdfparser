@@ -592,18 +592,6 @@ def naive_merge_with_images(texts, images, chunk_token_num=128, delimiter="\n。
 
     return cks, result_images
 
-def docx_question_level(p, bull=-1):
-    txt = re.sub(r"\u3000", " ", p.text).strip()
-    if p.style.name.startswith('Heading'):
-        return int(p.style.name.split(' ')[-1]), txt
-    else:
-        if bull < 0:
-            return 0, txt
-        for j, title in enumerate(BULLET_PATTERN[bull]):
-            if re.match(title, txt):
-                return j + 1, txt
-    return len(BULLET_PATTERN[bull]), txt
-
 
 def concat_img(img1, img2):
     if img1 and not img2:

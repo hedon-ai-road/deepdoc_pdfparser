@@ -1,7 +1,7 @@
 # DeepDoc PDF Parser
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python](https://img.shields.io/badge/python-3.8+-brightgreen.svg)](https://python.org)
+[![Python](https://img.shields.io/badge/python-3.12+-brightgreen.svg)](https://python.org)
 
 **专业的 PDF 解析库 - 基于 RAGFlow DeepDoc 模块抽取**
 
@@ -114,18 +114,6 @@ for table in page_2_tables:
     print(table.html)
 ```
 
-### 简单解析模式
-
-如果你的 PDF 文档质量较好，可以使用简单模式（不使用 OCR）：
-
-```python
-from deepdoc_pdfparser import parse_pdf_simple
-
-# 简单解析（更快，但不支持OCR）
-result = parse_pdf_simple("document.pdf")
-text = result.get_text()
-```
-
 ### 处理二进制数据
 
 ```python
@@ -151,13 +139,77 @@ result = parse_pdf_binary(pdf_binary, filename="document.pdf")
 - `parse(pdf_path, from_page=0, to_page=100000, callback=None, **kwargs)` - 解析 PDF 文件
 - `parse_binary(pdf_binary, filename="document.pdf", **kwargs)` - 解析二进制数据
 
-#### `PlainPdfParser`
+### 便捷函数
 
-简单的 PDF 解析器，不使用 OCR。
+#### `parse_pdf(pdf_path, from_page=0, to_page=100000, callback=None, **kwargs)`
 
-**方法**：
+使用深度学习模型解析 PDF 文件的主要函数。
 
-- `parse(pdf_path, **kwargs)` - 简单解析 PDF 文件
+**参数**：
+
+- `pdf_path` (str): PDF 文件路径
+- `from_page` (int): 起始页码（从 0 开始）
+- `to_page` (int): 结束页码
+- `callback` (Callable): 进度回调函数
+- `**kwargs`: 其他参数
+
+**返回**：
+
+- `ParseResult`: 解析结果对象
+
+#### `extract_text(pdf_path, **kwargs)`
+
+提取 PDF 中的所有文本。
+
+**参数**：
+
+- `pdf_path` (str): PDF 文件路径
+- `**kwargs`: 其他参数
+
+**返回**：
+
+- `str`: 提取的文本内容
+
+#### `extract_text_by_page(pdf_path, page_number, **kwargs)`
+
+提取 PDF 指定页面的文本。
+
+**参数**：
+
+- `pdf_path` (str): PDF 文件路径
+- `page_number` (int): 页码（从 0 开始）
+- `**kwargs`: 其他参数
+
+**返回**：
+
+- `str`: 提取的文本内容
+
+#### `extract_tables(pdf_path, **kwargs)`
+
+提取 PDF 中的所有表格（HTML 格式）。
+
+**参数**：
+
+- `pdf_path` (str): PDF 文件路径
+- `**kwargs`: 其他参数
+
+**返回**：
+
+- `List[str]`: 表格的 HTML 列表
+
+#### `parse_pdf_binary(pdf_binary, filename="document.pdf", **kwargs)`
+
+解析 PDF 二进制数据。
+
+**参数**：
+
+- `pdf_binary` (bytes): PDF 二进制数据
+- `filename` (str): 文件名（用于显示）
+- `**kwargs`: 其他参数
+
+**返回**：
+
+- `ParseResult`: 解析结果对象
 
 ### 数据类型
 
@@ -187,6 +239,7 @@ result = parse_pdf_binary(pdf_binary, filename="document.pdf")
 - `page_number: int` - 页码
 - `position: Optional[Tuple[float, float, float, float]]` - 位置信息
 - `layout_type: Optional[str]` - 布局类型
+- `confidence: Optional[float]` - 置信度
 - `raw_data: Optional[Dict[str, Any]]` - 原始数据
 
 #### `TableResult`
@@ -199,73 +252,79 @@ result = parse_pdf_binary(pdf_binary, filename="document.pdf")
 - `page_number: Optional[int]` - 页码
 - `position: Optional[Tuple[float, float, float, float]]` - 位置信息
 
-### 便捷函数
+## 📋 示例
 
-- `parse_pdf(pdf_path, **kwargs)` - 解析 PDF（推荐）
-- `parse_pdf_simple(pdf_path, **kwargs)` - 简单解析 PDF
-- `extract_text(pdf_path, **kwargs)` - 提取所有文本
-- `extract_text_by_page(pdf_path, page_number, **kwargs)` - 提取指定页面文本
-- `extract_tables(pdf_path, **kwargs)` - 提取所有表格
-- `parse_pdf_binary(pdf_binary, filename, **kwargs)` - 解析二进制数据
+### 完整示例
 
-## 🎯 支持的文档类型
+```python
+from deepdoc_pdfparser import parse_pdf, extract_text, extract_tables
 
-- **PDF 文档** - 主要支持的格式
-- **扫描版 PDF** - 通过 OCR 识别文字
-- **多语言文档** - 支持中英文混合文档
-- **复杂布局** - 支持多栏、表格、图文混排
+# 解析PDF文件
+pdf_path = "example.pdf"
 
-## ⚙️ 系统要求
+# 方法1: 使用便捷函数快速提取文本
+text = extract_text(pdf_path)
+print("提取的文本:")
+print(text)
 
-- Python 3.8+
-- 建议使用 GPU（可选，用于加速深度学习模型）
-- 内存建议 4GB 以上
+# 方法2: 使用便捷函数提取表格
+tables = extract_tables(pdf_path)
+print(f"\n找到 {len(tables)} 个表格:")
+for i, table in enumerate(tables):
+    print(f"表格 {i+1}:")
+    print(table)
 
-## 🤝 致谢
+# 方法3: 使用完整解析获取详细信息
+result = parse_pdf(pdf_path)
+print(f"\n解析结果:")
+print(f"总文本块: {len(result.chunks)}")
+print(f"总表格: {len(result.tables)}")
+print(f"元数据: {result.metadata}")
 
-本项目基于 [RAGFlow](https://github.com/infiniflow/ragflow) 的 DeepDoc 模块开发，感谢 RAGFlow 团队的杰出工作。
+# 查看每个文本块的详细信息
+for chunk in result.chunks:
+    print(f"页码: {chunk.page_number}")
+    print(f"布局类型: {chunk.layout_type}")
+    print(f"内容: {chunk.content[:100]}...")
+    if chunk.position:
+        print(f"位置: {chunk.position}")
+    print("-" * 50)
+```
 
-**原始项目**：
+## ⚙️ 配置和依赖
 
-- GitHub: https://github.com/infiniflow/ragflow
-- 许可证: Apache 2.0
+本库依赖于 RAGFlow 的 DeepDoc 模块。请确保：
+
+1. 已正确安装所有依赖
+2. 模型文件位于正确的路径
+3. 系统有足够的内存处理大型 PDF 文件
+
+## 🤝 贡献
+
+欢迎贡献代码！请：
+
+1. Fork 项目
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建 Pull Request
 
 ## 📄 许可证
 
 本项目采用 Apache 2.0 许可证。详见 [LICENSE](LICENSE) 文件。
 
-## 🚧 注意事项
+## 🙏 致谢
 
-1. **首次使用**：首次运行时会自动下载深度学习模型，请确保网络连接正常
-2. **模型文件**：模型文件会缓存到本地，约需要几百 MB 空间
-3. **性能优化**：建议在 GPU 环境下运行以获得更好的性能
-4. **内存使用**：解析大型 PDF 文件时可能需要较多内存
-
-## 🔧 开发
-
-### 安装开发依赖
-
-```bash
-uv add deepdoc-pdfparser[dev]
-```
-
-### 运行测试
-
-```bash
-pytest
-```
-
-### 代码格式化
-
-```bash
-black deepdoc_pdfparser/
-isort deepdoc_pdfparser/
-```
+本项目基于 [RAGFlow](https://github.com/infiniflow/ragflow) 项目的 DeepDoc 模块开发。感谢 RAGFlow 团队的出色工作。
 
 ## 📞 支持
 
-如果你遇到问题或有建议，请：
+如果您遇到问题或有功能请求，请：
 
-1. 查看 [FAQ](#)
-2. 提交 [Issue](https://github.com/yourusername/deepdoc-pdfparser/issues)
-3. 参考原始 [RAGFlow 项目](https://github.com/infiniflow/ragflow)
+1. 查看 [文档](README.md)
+2. 搜索 [已有问题](issues)
+3. 创建 [新问题](issues/new)
+
+---
+
+**注意**: 这是一个实验性项目，从 RAGFlow 中抽取。建议在生产环境使用前进行充分测试。

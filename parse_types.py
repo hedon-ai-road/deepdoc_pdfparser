@@ -4,7 +4,6 @@
 
 from typing import List, Dict, Any, Optional, Union, Tuple
 from dataclasses import dataclass
-from PIL import Image
 
 
 @dataclass

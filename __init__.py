@@ -7,9 +7,9 @@ DeepDoc PDF Parser - 基于RAGFlow DeepDoc的专业PDF解析库
 Original RAGFlow Repository: https://github.com/infiniflow/ragflow
 """
 
-from .parser import PdfParser, PlainPdfParser
-from .parse_types import ChunkResult, ParseResult
-from .utils import parse_pdf, parse_pdf_simple
+from .parser import PdfParser
+from .parse_types import ChunkResult, ParseResult, TableResult
+from .utils import parse_pdf, extract_text, extract_text_by_page, extract_tables, parse_pdf_binary
 
 __version__ = "0.1.0"
 __author__ = "Extracted from RAGFlow DeepDoc"
@@ -17,9 +17,12 @@ __license__ = "Apache-2.0"
 
 __all__ = [
     "PdfParser", 
-    "PlainPdfParser", 
     "ChunkResult", 
     "ParseResult",
+    "TableResult",
     "parse_pdf", 
-    "parse_pdf_simple"
+    "extract_text",
+    "extract_text_by_page", 
+    "extract_tables",
+    "parse_pdf_binary"
 ] 

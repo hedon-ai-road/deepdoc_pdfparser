@@ -19,12 +19,9 @@ import copy
 import re
 
 from ragflow.api.db import ParserType
-from io import BytesIO
-from ragflow.rag.nlp import rag_tokenizer, tokenize, tokenize_table, bullets_category, title_frequency, tokenize_chunks, docx_question_level
+from ragflow.rag.nlp import rag_tokenizer, tokenize_table, bullets_category, title_frequency, tokenize_chunks
 from ragflow.rag.utils import num_tokens_from_string
-from ragflow.deepdoc.parser import PdfParser, PlainParser, DocxParser
-from PIL import Image
-
+from ragflow.deepdoc.parser import PdfParser, PlainParser
 
 class Pdf(PdfParser):
     def __init__(self):
@@ -157,20 +154,6 @@ def chunk(filename, binary=None, from_page=0, to_page=100000,
 
         res = tokenize_table(tbls, doc, eng)
         res.extend(tokenize_chunks(chunks, doc, eng, pdf_parser))
-        return res
-
-    elif re.search(r"\.docx?$", filename, re.IGNORECASE):
-        docx_parser = Docx()
-        ti_list, tbls = docx_parser(filename, binary,
-                                    from_page=0, to_page=10000, callback=callback)
-        res = tokenize_table(tbls, doc, eng)
-        for text, image in ti_list:
-            d = copy.deepcopy(doc)
-            if image:
-                d['image'] = image
-                d["doc_type_kwd"] = "image"
-            tokenize(d, text, eng)
-            res.append(d)
         return res
     else:
         raise NotImplementedError("file type not supported yet(pdf and docx supported)")
