@@ -8,7 +8,8 @@ wheels/
 .pytest_cache/
 
 # model
-ragflow/rag/res
+**/*.onnx
+**/*.model
 
 # Virtual environments
 .venv

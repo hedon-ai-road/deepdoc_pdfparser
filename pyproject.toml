@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "deepdoc_pdfparser"
-version = "0.1.2"
+version = "0.1.3"
 description = "A professional PDF parser, extracted from ragflow.deepdoc"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -90,26 +90,25 @@ Documentation = "https://github.com/hedon-ai-road/deepdoc_pdfparser#readme"
 "Source Code" = "https://github.com/hedon-ai-road/deepdoc_pdfparser"
 
 [tool.hatch.build.targets.wheel]
-packages = ["."]
+packages = ["deepdoc_pdfparser", "ragflow"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/deepdoc_pdfparser", "/ragflow", "/README.md", "/LICENSE"]
+include = ["deepdoc_pdfparser/**", "ragflow/**", "README.md", "LICENSE"]
 exclude = [
-    "/.git",
-    "/tests",
-    "/docs",
-    "/fixtures",
-    "*.pyc",
-    "__pycache__",
+    "**/__pycache__",
+    "**/*.pyc",
+    "**/*.pyo",
     # 排除大型模型文件
-    "/ragflow/rag/res/deepdoc/*.onnx",
-    "/ragflow/rag/res/deepdoc/*.model",
-    "/ragflow/9b5ad71b2ce5302211f9c61530b329a4922fc6a4",
+    "**/*.onnx",
+    "**/*.model",
+    "ragflow/9b5ad71b2ce5302211f9c61530b329a4922fc6a4",
     # 排除其他大文件
     "*.tar.gz",
     "*.zip",
-    "/ragflow/**/__pycache__",
-    "/ragflow/**/*.pyc",
+    "tests/**",
+    "docs/**",
+    "fixtures/**",
+    ".git/**",
 ]
 
 [dependency-groups]
