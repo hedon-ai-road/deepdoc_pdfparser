@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "deepdoc-pdfparser"
-version = "0.1.0"
+name = "deepdoc_pdfparser"
+version = "0.1.2"
 description = "A professional PDF parser, extracted from ragflow.deepdoc"
 readme = "README.md"
 requires-python = ">=3.12"
