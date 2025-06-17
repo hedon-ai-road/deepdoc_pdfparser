@@ -95,3 +95,8 @@ packages = ["."]
 [tool.hatch.build.targets.sdist]
 include = ["/deepdoc_pdfparser", "/ragflow", "/README.md", "/LICENSE"]
 exclude = ["/.git", "/tests", "/docs", "/fixtures", "*.pyc", "__pycache__"]
+
+[dependency-groups]
+dev = [
+    "twine>=6.1.0",
+]
