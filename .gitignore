@@ -7,5 +7,8 @@ wheels/
 *.egg-info
 .pytest_cache/
 
+# model
+ragflow/rag/res
+
 # Virtual environments
 .venv
