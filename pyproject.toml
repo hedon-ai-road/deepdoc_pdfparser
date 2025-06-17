@@ -93,7 +93,7 @@ Documentation = "https://github.com/hedon-ai-road/deepdoc_pdfparser#readme"
 packages = ["deepdoc_pdfparser", "ragflow"]
 
 [tool.hatch.build.targets.sdist]
-include = ["deepdoc_pdfparser/**", "ragflow/**", "README.md", "LICENSE"]
+include = ["deepdoc_pdfparser/**", "README.md", "LICENSE"]
 exclude = [
     "**/__pycache__",
     "**/*.pyc",
@@ -101,7 +101,7 @@ exclude = [
     # 排除大型模型文件
     "**/*.onnx",
     "**/*.model",
-    "ragflow/9b5ad71b2ce5302211f9c61530b329a4922fc6a4",
+    "deepdoc_pdfparser/ragflow/9b5ad71b2ce5302211f9c61530b329a4922fc6a4",
     # 排除其他大文件
     "*.tar.gz",
     "*.zip",
