@@ -5,8 +5,8 @@
 """
 
 from typing import List, Optional, Callable
-from .parser import PdfParser
-from .parse_types import ParseResult
+from deepdoc_pdfparser.parser import PdfParser
+from deepdoc_pdfparser.parse_types import ParseResult
 
 
 def parse_pdf(pdf_path: str, 
