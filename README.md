@@ -30,6 +30,23 @@ uv add deepdoc-pdfparser
 pip install deepdoc-pdfparser
 ```
 
+## ⚙️ 配置和依赖（macOS）
+
+> 其他操作系统可根据具体的报错信息以此安装依赖项。
+
+### 下载 nltk 数据
+
+```python
+import nltk
+nltk.download('wordnet')
+```
+
+### 系统工具
+
+```bash
+brew install libomp poppler tesseract libmagic ghostscript pandoc
+```
+
 ## 🚀 快速开始
 
 ### 基本用法
