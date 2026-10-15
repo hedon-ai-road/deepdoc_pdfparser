@@ -101,6 +101,17 @@ for i, table_html in enumerate(tables):
     print(table_html)
 ```
 
+### 识别图片中的文字
+
+```python
+from deepdoc_pdfparser import ocr_image
+
+# 路径、二进制或 numpy 数组都可以
+lines = ocr_image("scan.png")
+for line in lines:
+    print(line.text, line.score, line.position)
+```
+
 ### 高级用法
 
 ```python
@@ -213,6 +224,18 @@ result = parse_pdf_binary(pdf_binary, filename="document.pdf")
 **返回**：
 
 - `List[str]`: 表格的 HTML 列表
+
+#### `ocr_image(image)`
+
+识别单张图片中的文字。扫描页里的文字仍然通过 `parse_pdf` 处理；这个函数用于 png、jpg 等图片本身。
+
+**参数**：
+
+- `image`: 图片路径、二进制、PIL 图片，或 RGB numpy 数组
+
+**返回**：
+
+- `List[OcrLine]`: 文字行。每行包含 `text`、`score`，以及四个角点 `box`。`position` 是外接矩形 `(x0, y0, x1, y1)`
 
 #### `parse_pdf_binary(pdf_binary, filename="document.pdf", **kwargs)`
 
