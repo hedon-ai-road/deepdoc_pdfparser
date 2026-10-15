@@ -195,9 +195,13 @@ class PdfParser:
         """
         try:
             # 使用ragflow的chunk函数进行解析
+            callback = kwargs.pop("callback", None)
+            if callback is None:
+                callback = self._default_callback
             results = ragflow_chunk(
                 filename=filename,
                 binary=pdf_binary,
+                callback=callback,
                 **kwargs
             )
             
