@@ -17,7 +17,7 @@ except ImportError as e:
     logging.warning(f"无法导入ragflow模块: {e}")
     logging.warning("请确保ragflow模块在正确的路径下")
 
-from parse_types import ChunkResult, ParseResult, TableResult
+from .parse_types import ChunkResult, ParseResult, TableResult
 
 
 class PdfParser:
@@ -195,9 +195,13 @@ class PdfParser:
         """
         try:
             # 使用ragflow的chunk函数进行解析
+            callback = kwargs.pop("callback", None)
+            if callback is None:
+                callback = self._default_callback
             results = ragflow_chunk(
                 filename=filename,
                 binary=pdf_binary,
+                callback=callback,
                 **kwargs
             )
             
