@@ -37,6 +37,24 @@ class TableResult:
         return f"TableResult(page={self.page_number}, html_length={len(self.html)})"
 
 
+@dataclass(frozen=True)
+class OcrLine:
+    """图片 OCR 的一行文字。"""
+    text: str
+    score: float
+    box: Tuple[Tuple[float, float], Tuple[float, float], Tuple[float, float], Tuple[float, float]]
+
+    @property
+    def position(self) -> Tuple[float, float, float, float]:
+        """外接矩形 (x0, y0, x1, y1)。"""
+        xs = [point[0] for point in self.box]
+        ys = [point[1] for point in self.box]
+        return (min(xs), min(ys), max(xs), max(ys))
+
+    def __str__(self) -> str:
+        return self.text
+
+
 @dataclass
 class ParseResult:
     """完整的解析结果"""
