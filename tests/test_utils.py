@@ -6,18 +6,14 @@ import os
 import pytest
 from unittest.mock import Mock, patch
 
-# 设置测试环境
-import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
-from utils import (
+from deepdoc_pdfparser.utils import (
     parse_pdf, 
     extract_text, 
     extract_text_by_page, 
     extract_tables, 
     parse_pdf_binary
 )
-from parse_types import ParseResult, ChunkResult, TableResult
+from deepdoc_pdfparser.parse_types import ParseResult, ChunkResult, TableResult
 
 
 class TestUtilsFunctions:

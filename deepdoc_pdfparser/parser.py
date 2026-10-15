@@ -17,7 +17,7 @@ except ImportError as e:
     logging.warning(f"无法导入ragflow模块: {e}")
     logging.warning("请确保ragflow模块在正确的路径下")
 
-from parse_types import ChunkResult, ParseResult, TableResult
+from .parse_types import ChunkResult, ParseResult, TableResult
 
 
 class PdfParser:
